@@ -18,6 +18,7 @@ var state := State.IDLE
 var player: Node2D
 
 func _ready() -> void:
+	print("activated")
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
 	if not $HurtboxArea.hurt.is_connected(take_damage):
@@ -93,5 +94,6 @@ func die() -> void:
 	queue_free()
 
 
-func _on_hurtbox_area_body_entered(body: Node2D) -> void:
-	print("something passed through my body")
+
+func _on_hurtbox_area_area_entered(area: Area2D) -> void:
+	print("something passed through me")
