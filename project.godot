@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="TheLegendofM"
-run/main_scene="uid://budhmsosqj23n"
+run/main_scene="uid://fb637a4v7yd4"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+TransitionManager="*uid://d33ipdpsrr2j5"
+Player="*uid://budhmsosqj23n"
 
 [display]
 
@@ -29,6 +34,13 @@ sprint={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemies"
+2d_physics/layer_4="triggers"
 
 [physics]
 
