@@ -11,6 +11,7 @@ var state := State.IDLE
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	$HitboxArea/CollisionShape2D.disabled = true
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
@@ -63,14 +64,11 @@ func attack() -> void:
 	is_attacking = true
 	state = State.ATTACK
 	position_hitbox()
-	print("player global position: ", global_position)
-	print("hitbox global position: ", $HitboxArea.global_position)
-	var col := $HitboxArea.get_node("CollisionShape2D")
-	print("collision shape found: ", col)
-	col.set_deferred("disabled", false)
+	
+	$HitboxArea/CollisionShape2D.disabled = false
 	$HitboxArea.damage = attack_damage
-	await get_tree().create_timer(2.0).timeout
-	col.set_deferred("disabled", true)
+	await get_tree().create_timer(.2).timeout
+	$HitboxArea/CollisionShape2D.disabled = true
 	
 	await get_tree().create_timer(0.2).timeout
 	is_attacking = false

@@ -386,6 +386,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gtgg"]
 size = Vector2(47, 39)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
+
 [node name="Player" type="CharacterBody2D" unique_id=741892095 groups=["player"]]
 z_index = 1
 collision_layer = 2
@@ -398,12 +400,10 @@ frame_progress = 0.40347886
 offset = Vector2(0, -27)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1795009343]
-visible = false
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_5gtgg")
 
 [node name="HurtboxArea" type="Area2D" parent="." unique_id=285290995]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=12915340]
 
@@ -413,7 +413,7 @@ collision_mask = 4
 script = ExtResource("3_gmlin")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=1538006885]
-disabled = true
+shape = SubResource("RectangleShape2D_gmlin")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1735310455]
 position_smoothing_enabled = true

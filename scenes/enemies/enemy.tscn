@@ -171,16 +171,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lu5c6"]
-size = Vector2(11, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8e3ao"]
+size = Vector2(49, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38ino"]
-size = Vector2(31, 30)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcftc"]
-size = Vector2(7, 4)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=451856353]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_8e3ao")
 
@@ -190,26 +187,15 @@ sprite_frames = SubResource("SpriteFrames_qch6t")
 animation = &"walk_up"
 frame_progress = 0.6397236
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1608122431]
-position = Vector2(-1.5, 9)
-shape = SubResource("RectangleShape2D_lu5c6")
-
-[node name="HurtboxArea" type="Area2D" parent="." unique_id=1780988523]
+[node name="HurtboxArea" type="Area2D" parent="." unique_id=1362829568]
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("3_38ino")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=912356572]
-position = Vector2(-0.5, 13)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=1327497166]
+position = Vector2(-0.5, 11.5)
+shape = SubResource("RectangleShape2D_8e3ao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599837591]
+position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_38ino")
-
-[node name="HitboxArea" type="Area2D" parent="." unique_id=248901384]
-collision_layer = 8
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=1411827546]
-position = Vector2(0, 18)
-shape = SubResource("RectangleShape2D_fcftc")
-
-[connection signal="body_entered" from="HurtboxArea" to="." method="_on_hurtbox_area_body_entered"]
-[connection signal="hurt" from="HurtboxArea" to="." method="take_damage"]
