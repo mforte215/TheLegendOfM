@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b7g8g86mu8l4e" path="res://assets/sprites/Player_one_animations.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bpid4lgtgudqe" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://pk4ygkjbyp6" path="res://scripts/hitbox.gd" id="3_gmlin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
 atlas = ExtResource("1_8afob")
@@ -397,16 +398,22 @@ frame_progress = 0.40347886
 offset = Vector2(0, -27)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1795009343]
+visible = false
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_5gtgg")
 
-[node name="HurtBoxArea" type="Area2D" parent="." unique_id=285290995]
+[node name="HurtboxArea" type="Area2D" parent="." unique_id=285290995]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxArea" unique_id=12915340]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=12915340]
 
-[node name="HitBoxArea" type="Area2D" parent="." unique_id=1725291741]
+[node name="HitboxArea" type="Area2D" parent="." unique_id=1725291741]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("3_gmlin")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea" unique_id=1538006885]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=1538006885]
+disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1735310455]
 position_smoothing_enabled = true

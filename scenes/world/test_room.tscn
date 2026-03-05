@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c2fhk67wls5pg" path="res://assets/sprites/Floor_sprites.png" id="1_cy37o"]
 [ext_resource type="Texture2D" uid="uid://cs7jk4b2ki8u6" path="res://assets/sprites/Wall_sprites.png" id="2_ytumw"]
 [ext_resource type="Texture2D" uid="uid://bt00ovyeedvrr" path="res://assets/sprites/topdown_walls.png" id="3_fc6vu"]
-[ext_resource type="PackedScene" uid="uid://budhmsosqj23n" path="res://scenes/player/player.tscn" id="4_ytumw"]
 [ext_resource type="Script" uid="uid://bml4ab30410ln" path="res://scenes/world/doorway_exit.gd" id="5_fc6vu"]
+[ext_resource type="PackedScene" uid="uid://d07wnvp1t3b2d" path="res://scenes/enemies/enemy.tscn" id="7_u3u0o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u7lr"]
 texture = ExtResource("1_cy37o")
@@ -2492,12 +2492,6 @@ z_index = 1
 tile_map_data = PackedByteArray("AAAAAAAAAQALAA4AAAABAAAAAQALABAAAAACAAAAAQALABAAAAADAAAAAQALABAAAAAEAAAAAQALABAAAAAFAAAAAQALABAAAAAGAAAAAQALABAAAAAHAAAAAQALABAAAAAIAAAAAQALABAAAAAJAAAAAQALABAAAAAKAAAAAQALABAAAAALAAAAAQALABAAAAAMAAAAAQALABAAAAANAAAAAQALABAAAAAOAAAAAQALABAAAAAPAAAAAQAOAA4AAAAAAAEAAQALAA8AAAABAAEAAQALABEAAAACAAEAAQALABEAAAADAAEAAQALABEAAAAEAAEAAQALABEAAAAFAAEAAQALABEAAAAGAAEAAQALABEAAAAHAAEAAQALABEAAAAIAAEAAQALABEAAAAJAAEAAQALABEAAAAKAAEAAQALABEAAAALAAEAAQALABEAAAAMAAEAAQALABEAAAANAAEAAQALABEAAAAOAAEAAQALABEAAAAPAAEAAQAOABAAAAAAAAIAAQAOABAAADAAAAMAAQAOABAAADAAAAQAAQAOABAAADAAAAUAAQAOABAAADAAAAYAAQAOABAAADAAAAcAAQAOABAAADAAAAgAAQAOAA4AADABAAgAAQAMAAwAADACAAgAAQAMAAwAADADAAgAAQAMAAwAADAEAAgAAQAMAAwAADAFAAgAAQAMAAwAADAIAAgAAQAMAAwAADAJAAgAAQAMAAwAADALAAgAAQAMAAwAADAKAAgAAQAMAAwAADAMAAgAAQAMAAwAADANAAgAAQAMAAwAADAOAAgAAQAMAAwAADAPAAgAAQAJAA4AADAPAAIAAQAOABAAAAAPAAMAAQAOABAAAAAPAAQAAQAOABAAAAAPAAUAAQAOABAAAAAPAAYAAQAOABAAAAAPAAcAAQAOABAAAAA=")
 tile_set = SubResource("TileSet_wb54u")
 
-[node name="Player" parent="." unique_id=741892095 instance=ExtResource("4_ytumw")]
-z_index = 1
-position = Vector2(441, 270)
-speed = 150.0
-sprint_speed = 250.0
-
 [node name="DoorwayExit" type="Area2D" parent="." unique_id=1397686298]
 position = Vector2(313, 423)
 collision_layer = 8
@@ -2510,3 +2504,6 @@ shape = SubResource("RectangleShape2D_ytumw")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=748854586]
 position = Vector2(442, 274)
+
+[node name="Enemy" parent="." unique_id=451856353 instance=ExtResource("7_u3u0o")]
+position = Vector2(95, 207)
