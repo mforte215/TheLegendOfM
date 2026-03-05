@@ -8,6 +8,9 @@ var facing := Vector2.DOWN
 enum State { IDLE, MOVE, SPRINT }  # Add SPRINT
 var state := State.IDLE
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func _physics_process(_delta: float) -> void:
 	var input := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
@@ -45,3 +48,7 @@ func get_direction_name() -> String:
 		return "right" if facing.x > 0 else "left"
 	else:
 		return "down" if facing.y > 0 else "up"
+		
+func place_at(pos: Vector2) -> void:
+	global_position = pos
+	

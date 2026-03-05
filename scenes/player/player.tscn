@@ -385,13 +385,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gtgg"]
 size = Vector2(47, 39)
 
-[node name="Player" type="CharacterBody2D" unique_id=741892095]
+[node name="Player" type="CharacterBody2D" unique_id=741892095 groups=["player"]]
+z_index = 1
+collision_layer = 2
 script = ExtResource("1_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=616954780]
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"walk_up"
-frame_progress = 0.08059807
+frame_progress = 0.40347886
 offset = Vector2(0, -27)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1795009343]
