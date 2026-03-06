@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ctvuysy3uxtrs" path="res://assets/sprites/Fungus - red.png" id="1_6xk8f"]
 [ext_resource type="Script" uid="uid://ch28lmjcg5r21" path="res://scenes/enemies/enemy.gd" id="1_8e3ao"]
+[ext_resource type="Resource" uid="uid://c0ltgaau12vix" path="res://resources/fungus_one_stats.tres" id="2_fcftc"]
 [ext_resource type="Script" uid="uid://06s8n6wcs4lh" path="res://scripts/hurtbox.gd" id="3_38ino"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8e3ao"]
@@ -183,11 +184,7 @@ size = Vector2(32, 36)
 z_index = 1
 collision_layer = 4
 script = ExtResource("1_8e3ao")
-max_health = null
-move_speed = null
-detection_range = null
-attack_damage = null
-knockback_strength = null
+stats = ExtResource("2_fcftc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=137119758]
 scale = Vector2(2, 2)

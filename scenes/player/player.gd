@@ -1,20 +1,18 @@
 extends CharacterBody2D
-
+@export var stats: CharacterStats
 @export var speed: float = 150.0
 @export var sprint_speed: float = 250.0  # Add this
 @export var attack_damage: int = 1
 var is_attacking := false
 var facing := Vector2.DOWN
-@export var max_health: int = 6
 @export var invincibility_time: float = 1.0
 var is_invincible: bool = false
-var health: int
 enum State { IDLE, MOVE, SPRINT, ATTACK }
 var state := State.IDLE
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	health = max_health
+	stats.current_health = stats.max_health
 	$HitboxArea/CollisionShape2D.disabled = true
 	$HurtboxArea.hurt.connect(take_damage)
 	
@@ -98,11 +96,12 @@ func take_damage(amount: int) -> void:
 		return
 	
 	is_invincible = true
-	health -= amount
-	print("player health: ", health)
+	var actual_damage: int = max(amount - stats.defense, 1)
+	stats.current_health -= actual_damage
+	print("player health: ", stats.current_health)
 	flash()  # Add this
 	
-	if health <= 0:
+	if stats.current_health <= 0:
 		die()
 		return
 	
