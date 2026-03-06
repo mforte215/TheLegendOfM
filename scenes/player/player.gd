@@ -5,14 +5,22 @@ extends CharacterBody2D
 @export var attack_damage: int = 1
 var is_attacking := false
 var facing := Vector2.DOWN
-
+@export var max_health: int = 6
+@export var invincibility_time: float = 1.0
+var is_invincible: bool = false
+var health: int
 enum State { IDLE, MOVE, SPRINT, ATTACK }
 var state := State.IDLE
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	health = max_health
 	$HitboxArea/CollisionShape2D.disabled = true
-
+	$HurtboxArea.hurt.connect(take_damage)
+	
+	print("HurtboxArea: ", $HurtboxArea)
+	print("HurtboxArea owner: ", $HurtboxArea.owner)
+	
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		print("attacking!")
@@ -84,3 +92,35 @@ func position_hitbox() -> void:
 	else:
 		# Vertical
 		hitbox.position = Vector2(0, offset * sign(facing.y))
+		
+func take_damage(amount: int) -> void:
+	if is_invincible:
+		return
+	
+	is_invincible = true
+	health -= amount
+	print("player health: ", health)
+	flash()  # Add this
+	
+	if health <= 0:
+		die()
+		return
+	
+	await get_tree().create_timer(invincibility_time).timeout
+	is_invincible = false
+
+func die() -> void:
+	print("player died")
+	# death handling will go here
+
+func flash() -> void:
+	var sprite := $AnimatedSprite2D
+	var timer := get_tree().create_timer(invincibility_time)
+	
+	while timer.time_left > 0:
+		sprite.modulate.a = 0.3
+		await get_tree().create_timer(0.1).timeout
+		sprite.modulate.a = 1.0
+		await get_tree().create_timer(0.1).timeout
+	
+	sprite.modulate.a = 1.0

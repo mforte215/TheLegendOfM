@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var move_speed: float = 40.0
 @export var detection_range: float = 150.0
 @export var attack_damage: int = 1
-
+@export var knockback_strength: float = 150.0
 var health: int
 
 # --- State Machine ---
@@ -18,13 +18,13 @@ var state := State.IDLE
 var player: Node2D
 
 func _ready() -> void:
-	print("activated")
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
 	if not $HurtboxArea.hurt.is_connected(take_damage):
-		print("added connection")
 		$HurtboxArea.hurt.connect(take_damage)
-
+	$HurtboxArea.area_entered.connect(_on_hitbox_area_entered)
+	
+	
 func _physics_process(_delta: float) -> void:
 	match state:
 		State.IDLE:
@@ -32,10 +32,10 @@ func _physics_process(_delta: float) -> void:
 		State.CHASE:
 			handle_chase()
 		State.HURT:
-			pass  # handled by timer
+			move_and_slide()
 		State.DEAD:
 			pass
-
+	check_hitbox()
 # --- States ---
 func handle_idle() -> void:
 	velocity = Vector2.ZERO
@@ -74,7 +74,6 @@ func get_direction_name(direction: Vector2) -> String:
 
 # --- Health ---
 func take_damage(amount: int) -> void:
-	print("enemy took damage: ", amount, " health remaining: ", health - amount)
 	if state == State.DEAD:
 		return
 	
@@ -84,6 +83,8 @@ func take_damage(amount: int) -> void:
 		die()
 	else:
 		state = State.HURT
+		apply_knockback()
+		hit_flash()
 		await get_tree().create_timer(0.4).timeout
 		state = State.CHASE
 
@@ -93,7 +94,31 @@ func die() -> void:
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
+func apply_knockback() -> void:
+	if not player:
+		return
+	var direction := player.global_position.direction_to(global_position)
+	velocity = direction * knockback_strength
+
+func hit_flash() -> void:
+	var sprite := $AnimatedSprite2D
+	sprite.modulate = Color.WHITE * 10  # bright white flash
+	await get_tree().create_timer(0.1).timeout
+	sprite.modulate = Color.WHITE  # back to normal
+	
+func _on_hitbox_area_entered(area: Node) -> void:
+	print("enemy hitbox detected: ", area.name, " groups: ", area.get_groups())
+	if area.is_in_group("hurtbox"):
+		area.hurt.emit(attack_damage)
 
 
-func _on_hurtbox_area_area_entered(area: Area2D) -> void:
-	print("something passed through me")
+func _on_hurtbox_area_hurt(amount: int) -> void:
+	print("Hello")
+
+func check_hitbox() -> void:
+	for area in $HitboxArea.get_overlapping_areas():
+		if area.is_in_group("hurtbox") and area.owner != self:
+			area.hurt.emit(attack_damage)
+			
+
+	
