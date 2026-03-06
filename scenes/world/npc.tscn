@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://be1ucmhd0mo5a"]
+
+[ext_resource type="Script" uid="uid://bsiuphrsxcpos" path="res://npc.gd" id="1_kmc6d"]
+[ext_resource type="Texture2D" uid="uid://cg61lgdqku6a4" path="res://assets/sprites/npc_1.png" id="2_1oqjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1oqjc"]
+size = Vector2(48, 56)
+
+[node name="NPC" type="Area2D" unique_id=1849193636]
+script = ExtResource("1_kmc6d")
+speaker_name = null
+dialogue_lines = null
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1501314413]
+texture = ExtResource("2_1oqjc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1996002255]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_1oqjc")
