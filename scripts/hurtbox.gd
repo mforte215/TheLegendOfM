@@ -9,5 +9,5 @@ func _ready() -> void:
 
 func _on_area_entered(area: Node) -> void:
 	print("hurtbox detected: ", area.name)
-	if area.is_in_group("hitbox"):
+	if area.is_in_group("hitbox") and area.owner != owner:
 		hurt.emit(area.damage)

@@ -2507,3 +2507,8 @@ position = Vector2(442, 274)
 
 [node name="Enemy" parent="." unique_id=451856353 instance=ExtResource("7_u3u0o")]
 position = Vector2(145, 258)
+max_health = null
+move_speed = null
+detection_range = null
+attack_damage = null
+knockback_strength = null

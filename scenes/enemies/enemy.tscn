@@ -172,14 +172,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8e3ao"]
-size = Vector2(49, 47)
+size = Vector2(33, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38ino"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcftc"]
+size = Vector2(32, 36)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=451856353]
 z_index = 1
 collision_layer = 4
 script = ExtResource("1_8e3ao")
+max_health = null
+move_speed = null
+detection_range = null
+attack_damage = null
+knockback_strength = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=137119758]
 scale = Vector2(2, 2)
@@ -193,9 +201,19 @@ collision_mask = 8
 script = ExtResource("3_38ino")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea" unique_id=1327497166]
-position = Vector2(-0.5, 11.5)
+position = Vector2(-0.5, 13.5)
 shape = SubResource("RectangleShape2D_8e3ao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599837591]
 position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_38ino")
+
+[node name="HitboxArea" type="Area2D" parent="." unique_id=502218779]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=1613970116]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_fcftc")
+
+[connection signal="hurt" from="HurtboxArea" to="." method="_on_hurtbox_area_hurt"]
