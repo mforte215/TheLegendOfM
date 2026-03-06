@@ -123,3 +123,9 @@ func flash() -> void:
 		await get_tree().create_timer(0.1).timeout
 	
 	sprite.modulate.a = 1.0
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		SaveManager.save_game()
+	if Input.is_action_just_pressed("ui_cancel"):
+		SaveManager.load_game()

@@ -21,6 +21,7 @@ TransitionManager="*uid://d33ipdpsrr2j5"
 Player="*uid://budhmsosqj23n"
 DialogueBox="*uid://b8353v30sube2"
 HUD="*uid://bork3slxpgdhw"
+SaveManager="*uid://cf5t6tax0l2v7"
 
 [display]
 
