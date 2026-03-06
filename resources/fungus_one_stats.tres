@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://c0ltgaau12vix"]
+
+[ext_resource type="Script" uid="uid://dfuvdlcsylrrx" path="res://resources/character_stats.gd" id="1_wnjrx"]
+
+[resource]
+script = ExtResource("1_wnjrx")
+character_name = "Red Fungus"
+max_health = 3
+current_health = 3
+speed = 80.0
+metadata/_custom_type_script = "uid://dfuvdlcsylrrx"

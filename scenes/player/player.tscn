@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b7g8g86mu8l4e" path="res://assets/sprites/Player_one_animations.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bpid4lgtgudqe" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Resource" uid="uid://be3aomj22wvlv" path="res://resources/player_stats.tres" id="2_p47bc"]
 [ext_resource type="Script" uid="uid://pk4ygkjbyp6" path="res://scripts/hitbox.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://06s8n6wcs4lh" path="res://scripts/hurtbox.gd" id="3_lvxji"]
 
@@ -396,11 +397,7 @@ size = Vector2(47, 55)
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_dovo2")
-speed = null
-sprint_speed = null
-attack_damage = null
-max_health = null
-invincibility_time = null
+stats = ExtResource("2_p47bc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=616954780]
 sprite_frames = SubResource("SpriteFrames_qek5x")

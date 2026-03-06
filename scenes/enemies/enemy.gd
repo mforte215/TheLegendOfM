@@ -1,12 +1,7 @@
 extends CharacterBody2D
-
-# --- Stats ---
-@export var max_health: int = 3
-@export var move_speed: float = 40.0
+@export var stats: CharacterStats
 @export var detection_range: float = 150.0
-@export var attack_damage: int = 1
 @export var knockback_strength: float = 150.0
-var health: int
 
 # --- State Machine ---
 enum State { IDLE, CHASE, HURT, DEAD }
@@ -18,11 +13,10 @@ var state := State.IDLE
 var player: Node2D
 
 func _ready() -> void:
-	health = max_health
+	stats.current_health = stats.max_health
 	player = get_tree().get_first_node_in_group("player")
 	if not $HurtboxArea.hurt.is_connected(take_damage):
 		$HurtboxArea.hurt.connect(take_damage)
-	$HurtboxArea.area_entered.connect(_on_hitbox_area_entered)
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -49,7 +43,7 @@ func handle_chase() -> void:
 		return
 	
 	var direction := global_position.direction_to(player.global_position)
-	velocity = direction * move_speed
+	velocity = direction * stats.speed
 	move_and_slide()
 	update_animation(direction)
 	
@@ -77,9 +71,9 @@ func take_damage(amount: int) -> void:
 	if state == State.DEAD:
 		return
 	
-	health -= amount
+	stats.current_health -= amount
 	
-	if health <= 0:
+	if stats.current_health <= 0:
 		die()
 	else:
 		state = State.HURT
@@ -105,20 +99,11 @@ func hit_flash() -> void:
 	sprite.modulate = Color.WHITE * 10  # bright white flash
 	await get_tree().create_timer(0.1).timeout
 	sprite.modulate = Color.WHITE  # back to normal
-	
-func _on_hitbox_area_entered(area: Node) -> void:
-	print("enemy hitbox detected: ", area.name, " groups: ", area.get_groups())
-	if area.is_in_group("hurtbox"):
-		area.hurt.emit(attack_damage)
-
-
-func _on_hurtbox_area_hurt(amount: int) -> void:
-	print("Hello")
 
 func check_hitbox() -> void:
 	for area in $HitboxArea.get_overlapping_areas():
 		if area.is_in_group("hurtbox") and area.owner != self:
-			area.hurt.emit(attack_damage)
+			area.hurt.emit(stats.attack)
 			
 
 	
