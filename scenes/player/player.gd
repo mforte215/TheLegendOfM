@@ -98,7 +98,7 @@ func take_damage(amount: int) -> void:
 	is_invincible = true
 	var actual_damage: int = max(amount - stats.defense, 1)
 	stats.current_health -= actual_damage
-	print("player health: ", stats.current_health)
+	HUD.update_hearts()
 	flash()  # Add this
 	
 	if stats.current_health <= 0:

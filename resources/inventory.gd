@@ -4,7 +4,7 @@ class_name Inventory
 signal item_added
 signal item_removed
 signal inventory_changed
-
+var equipped_item: ItemData = null
 @export var items: Array = []
 @export var max_size: int = 20
 
@@ -27,3 +27,10 @@ func remove_item(item: ItemData) -> bool:
 
 func has_item(item: ItemData) -> bool:
 	return items.has(item)
+	
+func equip_item(item: ItemData) -> void:
+	if has_item(item):
+		equipped_item = item
+
+func unequip_item() -> void:
+	equipped_item = null

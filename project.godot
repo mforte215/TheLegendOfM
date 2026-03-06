@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 TransitionManager="*uid://d33ipdpsrr2j5"
 Player="*uid://budhmsosqj23n"
 DialogueBox="*uid://b8353v30sube2"
+HUD="*uid://bork3slxpgdhw"
 
 [display]
 
