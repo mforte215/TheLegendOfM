@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cujiudv5r2tj"]
+
+[ext_resource type="Texture2D" uid="uid://doj5dkn60ahmo" path="res://assets/sprites/Campfire_48x48.png" id="1_bl25q"]
+[ext_resource type="Script" uid="uid://hl83vrgxe7j2" path="res://scenes/world/campfire.gd" id="2_dnu7i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnu7i"]
+atlas = ExtResource("1_bl25q")
+region = Rect2(0, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6epb"]
+atlas = ExtResource("1_bl25q")
+region = Rect2(48, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeowr"]
+atlas = ExtResource("1_bl25q")
+region = Rect2(96, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8uhy"]
+atlas = ExtResource("1_bl25q")
+region = Rect2(144, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtf6h"]
+atlas = ExtResource("1_bl25q")
+region = Rect2(240, 0, 48, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3emsu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnu7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6epb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeowr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8uhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtf6h")
+}],
+"loop": true,
+"name": &"burn",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_dnu7i"]
+colors = PackedColorArray(0.8672593, 0.5998633, 1.540184e-06, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t6epb"]
+gradient = SubResource("Gradient_dnu7i")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.4869565)
+fill_to = Vector2(0.3652174, 0.34347826)
+
+[node name="Campfire" type="AnimatedSprite2D" unique_id=4818275]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_3emsu")
+animation = &"burn"
+frame_progress = 0.7240745
+script = ExtResource("2_dnu7i")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2021581039]
+position = Vector2(-1, 22)
+energy = 1.6
+texture = SubResource("GradientTexture2D_t6epb")
+texture_scale = 4.5
+height = 512.0

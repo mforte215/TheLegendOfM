@@ -11,6 +11,7 @@ enum State { IDLE, MOVE, SPRINT, ATTACK }
 var state := State.IDLE
 
 func _ready() -> void:
+	$Camera2D.enabled = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	stats.current_health = stats.max_health
 	$HitboxArea/CollisionShape2D.disabled = true
@@ -124,6 +125,9 @@ func flash() -> void:
 	
 	sprite.modulate.a = 1.0
 
+func enable_camera() -> void:
+	$Camera2D.enabled = true
+	
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		SaveManager.save_game()
