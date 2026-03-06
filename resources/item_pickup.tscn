@@ -1,18 +1,23 @@
 [gd_scene format=3 uid="uid://c8yqttwycf5ug"]
 
 [ext_resource type="Script" uid="uid://dg215chbj60s6" path="res://resources/item_pickup.gd" id="1_2vq3m"]
-[ext_resource type="Texture2D" uid="uid://c7i8lkenms2nx" path="res://assets/sprites/ice_cream.png" id="2_28v2t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bay1x"]
 radius = 13.0
 
 [node name="ItemPickup" type="Area2D" unique_id=1034540688]
+light_mask = 8
+visibility_layer = 2
 script = ExtResource("1_2vq3m")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=445622945]
+light_mask = 8
+visibility_layer = 2
 position = Vector2(0.4951439, -1)
-scale = Vector2(0.45, 0.436)
-texture = ExtResource("2_28v2t")
+scale = Vector2(0.065, 0.063)
+offset = Vector2(0, -26)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771449893]
+light_mask = 8
+visibility_layer = 2
 shape = SubResource("CircleShape2D_bay1x")

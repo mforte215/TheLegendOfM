@@ -2511,15 +2511,13 @@ position = Vector2(442, 274)
 [node name="Enemy" parent="." unique_id=451856353 instance=ExtResource("7_u3u0o")]
 position = Vector2(145, 258)
 
-[node name="ItemPickup" parent="." unique_id=1034540688 instance=ExtResource("7_6s7be")]
-position = Vector2(620, 272)
-collision_layer = 8
-collision_mask = 2
-item = ExtResource("8_vnu35")
-
 [node name="NPC" parent="." unique_id=1849193636 instance=ExtResource("9_vnu35")]
 position = Vector2(635, 142)
 collision_layer = 8
 collision_mask = 2
 speaker_name = "Schooly"
 dialogue_lines = ["Hey! Welcome to my game!", "This going to be an EPIC adventure!"]
+
+[node name="ItemPickup" parent="." unique_id=1034540688 instance=ExtResource("7_6s7be")]
+position = Vector2(600, 298)
+item = ExtResource("8_vnu35")
