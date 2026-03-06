@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_wnjrx")
 character_name = "Red Fungus"
-max_health = 3
-current_health = 3
+max_health = 4
+current_health = 4
 speed = 80.0
 metadata/_custom_type_script = "uid://dfuvdlcsylrrx"
