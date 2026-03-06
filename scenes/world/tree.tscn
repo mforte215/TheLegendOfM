@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://o5gbqdi1m6ys"]
+
+[ext_resource type="Texture2D" uid="uid://cs0fn5gfkrm3a" path="res://assets/sprites/Trees_Oak_Green_Small_Shake_48x48.png" id="1_madqg"]
+[ext_resource type="Script" uid="uid://sfhq7xkg8d6h" path="res://scenes/world/tree.gd" id="2_gvg74"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvg74"]
+atlas = ExtResource("1_madqg")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7i4x"]
+atlas = ExtResource("1_madqg")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8re1"]
+atlas = ExtResource("1_madqg")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i1ocq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvg74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7i4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvg74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8re1")
+}],
+"loop": true,
+"name": &"sway",
+"speed": 2.0
+}]
+
+[node name="Tree" type="AnimatedSprite2D" unique_id=1752516389]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_i1ocq")
+animation = &"sway"
+frame_progress = 0.029559255
+speed_scale = 0.7
+script = ExtResource("2_gvg74")
