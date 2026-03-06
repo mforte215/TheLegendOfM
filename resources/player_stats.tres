@@ -10,9 +10,8 @@ metadata/_custom_type_script = "uid://cavw43tjrqbuk"
 [resource]
 script = ExtResource("1_wld0n")
 character_name = "Player"
-max_health = 5
-current_health = 5
-attack = null
+max_health = 12
+current_health = 12
 defense = null
 speed = 150.0
 level = null

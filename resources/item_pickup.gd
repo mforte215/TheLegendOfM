@@ -10,6 +10,8 @@ func _on_body_entered(body: Node) -> void:
 		return
 	
 	if Player.stats.inventory.add_item(item):
+		Player.stats.inventory.equip_item(item)
+		HUD.update_item_slot()
 		print("picked up: ", item.item_name)
 		print("inventory size: ", Player.stats.inventory.items.size())
 		for i in Player.stats.inventory.items:
