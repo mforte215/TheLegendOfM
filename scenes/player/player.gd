@@ -12,7 +12,7 @@ var state := State.IDLE
 
 func _ready() -> void:
 	$Camera2D.enabled = false
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	stats.current_health = stats.max_health
 	$HitboxArea/CollisionShape2D.disabled = true
 	$HurtboxArea.hurt.connect(take_damage)
@@ -127,9 +127,6 @@ func flash() -> void:
 
 func enable_camera() -> void:
 	$Camera2D.enabled = true
-	
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		SaveManager.save_game()
-	if Input.is_action_just_pressed("ui_cancel"):
-		SaveManager.load_game()
+			
+func disable_camera() -> void:
+	$Camera2D.enabled = false

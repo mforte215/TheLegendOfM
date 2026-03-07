@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c7wrullwfvnbe"]
+
+[ext_resource type="Script" uid="uid://bvacj6w63k0wo" path="res://scenes/ui/main_menu.gd" id="1_1g8jr"]
+[ext_resource type="PackedScene" uid="uid://cmgb7ndqs6dg8" path="res://scenes/world/main_menu_background.tscn" id="1_fe2o3"]
+[ext_resource type="Texture2D" uid="uid://bpq4nx0xy6lbp" path="res://assets/sprites/adventures_of_the_past_logo.png" id="2_1g8jr"]
+[ext_resource type="AudioStream" uid="uid://bsvgk18kgcgyv" path="res://assets/audio/forest_theme.ogg" id="2_m1kxf"]
+
+[node name="MainMenu" type="Node2D" unique_id=699484556]
+script = ExtResource("1_1g8jr")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1183765268]
+stream = ExtResource("2_m1kxf")
+autoplay = true
+
+[node name="MainMenuBackground" parent="." unique_id=235045368 instance=ExtResource("1_fe2o3")]
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=830771848]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer" unique_id=930962058]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 234.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="Logo" type="TextureRect" parent="UILayer/VBoxContainer" unique_id=594803413]
+custom_minimum_size = Vector2(400, 174)
+layout_mode = 2
+texture = ExtResource("2_1g8jr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UILayer/VBoxContainer" unique_id=918681253]
+layout_mode = 2
+
+[node name="NewGame" type="Button" parent="UILayer/VBoxContainer/ButtonContainer" unique_id=1808386636]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "New Game"
+
+[node name="Continue" type="Button" parent="UILayer/VBoxContainer/ButtonContainer" unique_id=722262341]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Continue"
+
+[node name="Options" type="Button" parent="UILayer/VBoxContainer/ButtonContainer" unique_id=673084591]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Options"
+
+[node name="Quit" type="Button" parent="UILayer/VBoxContainer/ButtonContainer" unique_id=2005355085]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Quit"

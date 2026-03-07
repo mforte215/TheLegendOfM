@@ -394,6 +394,7 @@ size = Vector2(47, 55)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 
 [node name="Player" type="CharacterBody2D" unique_id=741892095 groups=["player"]]
+process_mode = 1
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_dovo2")

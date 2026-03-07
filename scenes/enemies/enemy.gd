@@ -71,9 +71,13 @@ func take_damage(amount: int) -> void:
 	if state == State.DEAD:
 		return
 	
-	stats.current_health -= amount
+	var actual_damage: int = max(amount - stats.defense, 1)
+	stats.current_health -= actual_damage
+	print("enemy took damage: ", actual_damage, " health remaining: ", stats.current_health)
 	
 	if stats.current_health <= 0:
+		state = State.DEAD
+		await hit_flash()  # flash before dying
 		die()
 	else:
 		state = State.HURT
@@ -96,9 +100,9 @@ func apply_knockback() -> void:
 
 func hit_flash() -> void:
 	var sprite := $AnimatedSprite2D
-	sprite.modulate = Color.WHITE * 10  # bright white flash
+	sprite.modulate = Color.WHITE * 10
 	await get_tree().create_timer(0.1).timeout
-	sprite.modulate = Color.WHITE  # back to normal
+	sprite.modulate = Color.WHITE
 
 func check_hitbox() -> void:
 	for area in $HitboxArea.get_overlapping_areas():
