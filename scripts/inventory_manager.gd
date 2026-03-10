@@ -125,3 +125,9 @@ func _find_empty_slot() -> int:
 		if slots[i] == null:
 			return i
 	return -1
+
+func clear_inventory() -> void:
+	for i in MAX_SLOTS:
+		slots[i] = null
+	equipped.clear()
+	inventory_changed.emit()

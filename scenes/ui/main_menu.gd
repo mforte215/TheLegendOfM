@@ -22,10 +22,13 @@ func _on_music_finished() -> void:
 	music.play()
 
 func _on_new_game() -> void:
+	InventoryManager.clear_inventory()
+	Player.stats.current_health = Player.stats.max_health
 	await TransitionManager.transition_to("res://scenes/world/test_room.tscn")
 	Player.show()
 	Player.enable_camera()
-	HUD.show()	
+	HUD.show()
+	HUD.update_hearts()
 
 func _on_continue() -> void:
 	SaveManager.load_game()

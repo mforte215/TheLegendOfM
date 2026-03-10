@@ -66,9 +66,7 @@ func load_game() -> bool:
 	Player.stats.experience = stats["experience"]
 	
 	# Clear inventory
-	for i in InventoryManager.MAX_SLOTS:
-		InventoryManager.slots[i] = null
-	InventoryManager.equipped.clear()
+	InventoryManager.clear_inventory()
 	
 	# Restore inventory slots
 	for slot_data in save_data["inventory"]["slots"]:
@@ -77,7 +75,7 @@ func load_game() -> bool:
 			var index: int = slot_data["index"]
 			InventoryManager.slots[index] = {
 				"item": item,
-				"quantity": slot_data["quantity"]
+				"quantity": int(slot_data["quantity"])
 			}
 	
 	# Restore equipped items
