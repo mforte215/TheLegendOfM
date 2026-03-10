@@ -15,13 +15,9 @@ func _on_body_entered(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
 	
-	if Player.stats.inventory.add_item(item):
+	if InventoryManager.add_item(item):
 		print("picked up: ", item.item_name)
-		print("inventory size: ", Player.stats.inventory.items.size())
-		for i in Player.stats.inventory.items:
-			print("- ", i.item_name)
-		Player.stats.inventory.equip_item(item)
-		HUD.update_item_slot()
+		print("inventory size: ", InventoryManager.get_item_count(item.id))
 		queue_free()
 	else:
 		print("inventory full")

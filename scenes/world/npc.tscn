@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cg61lgdqku6a4" path="res://assets/sprites/npc_1.png" id="2_1oqjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1oqjc"]
-size = Vector2(48, 56)
+size = Vector2(69, 58)
 
 [node name="NPC" type="Area2D" unique_id=1849193636]
 script = ExtResource("1_kmc6d")
@@ -15,5 +15,5 @@ dialogue_lines = null
 texture = ExtResource("2_1oqjc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1996002255]
-position = Vector2(0, 3)
+position = Vector2(-0.5, 4)
 shape = SubResource("RectangleShape2D_1oqjc")

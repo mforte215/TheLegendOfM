@@ -22,17 +22,17 @@ func _ready() -> void:
 	
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
-		print("attacking!")
 		attack()
 		return
+	
+	if is_attacking:
+		return  # Don't let movement overwrite attack state
 	
 	var input := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
-
 	var is_sprinting := Input.is_action_pressed("sprint")
-
 	if input != Vector2.ZERO:
 		facing = input
 		velocity = input * (sprint_speed if is_sprinting else speed)
@@ -40,7 +40,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 		state = State.IDLE
-
 	move_and_slide()
 	update_animation()
 
@@ -55,7 +54,9 @@ func update_animation() -> void:
 			anim.play("walk_" + dir)
 		State.SPRINT:
 			anim.play("walk_" + dir)  # Reuses walk animation for now
-
+		State.ATTACK:
+			print("Playing attack animation")
+			anim.play("punch_" + dir)
 
 
 func get_direction_name() -> String:
@@ -70,14 +71,19 @@ func place_at(pos: Vector2) -> void:
 func attack() -> void:
 	is_attacking = true
 	state = State.ATTACK
+	velocity = Vector2.ZERO  # Stop movement during attack
 	position_hitbox()
 	
 	$HitboxArea/CollisionShape2D.disabled = false
-	$HitboxArea.damage = attack_damage
-	await get_tree().create_timer(.2).timeout
+	$HitboxArea.damage = stats.attack
+	
+	# Play the animation and wait for it to finish
+	var dir := get_direction_name()
+	$AnimatedSprite2D.play("punch_" + dir)
+	await $AnimatedSprite2D.animation_finished  # await the SIGNAL, not call it
+	
 	$HitboxArea/CollisionShape2D.disabled = true
 	
-	await get_tree().create_timer(0.2).timeout
 	is_attacking = false
 	state = State.IDLE
 	
