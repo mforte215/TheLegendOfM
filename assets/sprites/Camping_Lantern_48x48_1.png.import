@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxjfpc47dqrr6"
-path="res://.godot/imported/Camping_Lantern_48x48_1.png-e6cb1974a3bfdff72b23443973eef808.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Camping_Lantern_48x48_1.png"
-dest_files=["res://.godot/imported/Camping_Lantern_48x48_1.png-e6cb1974a3bfdff72b23443973eef808.ctex"]
 
 [params]
 

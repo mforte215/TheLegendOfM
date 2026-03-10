@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpq4nx0xy6lbp"
-path="res://.godot/imported/adventures_of_the_past_logo.png-771285aa6ab4cf3196b66ab3ec2b5874.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/adventures_of_the_past_logo.png"
-dest_files=["res://.godot/imported/adventures_of_the_past_logo.png-771285aa6ab4cf3196b66ab3ec2b5874.ctex"]
 
 [params]
 

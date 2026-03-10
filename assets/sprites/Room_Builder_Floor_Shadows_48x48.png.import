@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmquq5j53q0ct"
-path="res://.godot/imported/Room_Builder_Floor_Shadows_48x48.png-2628984731936349890fcec9fb4be6ab.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Room_Builder_Floor_Shadows_48x48.png"
-dest_files=["res://.godot/imported/Room_Builder_Floor_Shadows_48x48.png-2628984731936349890fcec9fb4be6ab.ctex"]
 
 [params]
 

@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cs0fn5gfkrm3a"
-path="res://.godot/imported/Trees_Oak_Green_Small_Shake_48x48.png-9f772c9b49525cca8f19a1d3425ae807.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Trees_Oak_Green_Small_Shake_48x48.png"
-dest_files=["res://.godot/imported/Trees_Oak_Green_Small_Shake_48x48.png-9f772c9b49525cca8f19a1d3425ae807.ctex"]
 
 [params]
 

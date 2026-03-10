@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7i8lkenms2nx"
-path="res://.godot/imported/ice_cream.png-e7b426d5fbeb24e99d790f92ca97a83f.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/ice_cream.png"
-dest_files=["res://.godot/imported/ice_cream.png-e7b426d5fbeb24e99d790f92ca97a83f.ctex"]
 
 [params]
 

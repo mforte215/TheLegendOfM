@@ -3,12 +3,11 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://bsvgk18kgcgyv"
-path="res://.godot/imported/forest_theme.ogg-0a4cbf20514ee14d217e0d0cd0a2e3f2.oggvorbisstr"
+valid=false
 
 [deps]
 
 source_file="res://assets/audio/forest_theme.ogg"
-dest_files=["res://.godot/imported/forest_theme.ogg-0a4cbf20514ee14d217e0d0cd0a2e3f2.oggvorbisstr"]
 
 [params]
 

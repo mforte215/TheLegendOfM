@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmt6337l4yjvy"
-path="res://.godot/imported/Godot_Autotiles_48x48.png-1d805ce6f67afa46a98124662d50ade8.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Godot_Autotiles_48x48.png"
-dest_files=["res://.godot/imported/Godot_Autotiles_48x48.png-1d805ce6f67afa46a98124662d50ade8.ctex"]
 
 [params]
 

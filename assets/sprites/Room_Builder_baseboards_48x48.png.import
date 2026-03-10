@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pjrcsvbkdc6i"
-path="res://.godot/imported/Room_Builder_baseboards_48x48.png-3d8e06280ec4649be709b706437669ab.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Room_Builder_baseboards_48x48.png"
-dest_files=["res://.godot/imported/Room_Builder_baseboards_48x48.png-3d8e06280ec4649be709b706437669ab.ctex"]
 
 [params]
 

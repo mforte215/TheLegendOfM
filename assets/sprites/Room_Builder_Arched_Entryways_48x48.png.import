@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7j66xloljiwn"
-path="res://.godot/imported/Room_Builder_Arched_Entryways_48x48.png-2dfb4cb5bdc22d72fa1d9ef684407c05.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Room_Builder_Arched_Entryways_48x48.png"
-dest_files=["res://.godot/imported/Room_Builder_Arched_Entryways_48x48.png-2dfb4cb5bdc22d72fa1d9ef684407c05.ctex"]
 
 [params]
 

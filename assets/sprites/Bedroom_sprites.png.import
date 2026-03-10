@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjyhnb4cgmvwl"
-path="res://.godot/imported/Bedroom_sprites.png-d826948cee8808020052766ae88dd372.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Bedroom_sprites.png"
-dest_files=["res://.godot/imported/Bedroom_sprites.png-d826948cee8808020052766ae88dd372.ctex"]
 
 [params]
 

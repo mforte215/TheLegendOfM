@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2fhk67wls5pg"
-path="res://.godot/imported/Floor_sprites.png-b13f0bbf9efb26877e39e35bf2088627.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Floor_sprites.png"
-dest_files=["res://.godot/imported/Floor_sprites.png-b13f0bbf9efb26877e39e35bf2088627.ctex"]
 
 [params]
 

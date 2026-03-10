@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bymuwccclfr3"
-path="res://.godot/imported/Trees_Birch_Brown_Small_Shake_48x48.png-8281b1b37a837016c310618663b7cbf8.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Trees_Birch_Brown_Small_Shake_48x48.png"
-dest_files=["res://.godot/imported/Trees_Birch_Brown_Small_Shake_48x48.png-8281b1b37a837016c310618663b7cbf8.ctex"]
 
 [params]
 

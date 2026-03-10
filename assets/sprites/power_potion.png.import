@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bus3c8apm0kq8"
-path="res://.godot/imported/power_potion.png-264e6cb4382dbdd73ea4c1f050667750.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/power_potion.png"
-dest_files=["res://.godot/imported/power_potion.png-264e6cb4382dbdd73ea4c1f050667750.ctex"]
 
 [params]
 

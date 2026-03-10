@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fv8088v6bf07"
-path="res://.godot/imported/magic_potion_one.png-6c47f737227549c54c4a7739d91087e7.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/magic_potion_one.png"
-dest_files=["res://.godot/imported/magic_potion_one.png-6c47f737227549c54c4a7739d91087e7.ctex"]
 
 [params]
 

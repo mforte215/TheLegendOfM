@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctvuysy3uxtrs"
-path="res://.godot/imported/Fungus - red.png-98c05232702de79392026275dbac34e7.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Fungus - red.png"
-dest_files=["res://.godot/imported/Fungus - red.png-98c05232702de79392026275dbac34e7.ctex"]
 
 [params]
 

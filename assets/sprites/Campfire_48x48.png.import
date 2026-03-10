@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://doj5dkn60ahmo"
-path="res://.godot/imported/Campfire_48x48.png-85691a3ebe2c02d499d3f3a58f1651f1.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Campfire_48x48.png"
-dest_files=["res://.godot/imported/Campfire_48x48.png-85691a3ebe2c02d499d3f3a58f1651f1.ctex"]
 
 [params]
 

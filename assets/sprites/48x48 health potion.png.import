@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://uh74enbkeoe7"
-path="res://.godot/imported/48x48 health potion.png-367795f4d20c5ffd2145d6af65059ab9.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/48x48 health potion.png"
-dest_files=["res://.godot/imported/48x48 health potion.png-367795f4d20c5ffd2145d6af65059ab9.ctex"]
 
 [params]
 

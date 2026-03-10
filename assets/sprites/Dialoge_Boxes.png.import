@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmvpagulmq26o"
-path="res://.godot/imported/Dialoge_Boxes.png-37a4997edab49cce402b42b03540a5a6.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Dialoge_Boxes.png"
-dest_files=["res://.godot/imported/Dialoge_Boxes.png-37a4997edab49cce402b42b03540a5a6.ctex"]
 
 [params]
 

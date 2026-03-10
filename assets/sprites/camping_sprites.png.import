@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxq8du0af8fbi"
-path="res://.godot/imported/camping_sprites.png-e13527341065a4ff02504dc416e716c0.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/camping_sprites.png"
-dest_files=["res://.godot/imported/camping_sprites.png-e13527341065a4ff02504dc416e716c0.ctex"]
 
 [params]
 

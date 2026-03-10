@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwul4kkoxdakr"
-path="res://.godot/imported/Farmer_1_Harvesting_36_frames_48x48.png-b92e51eb4500b36760d9498900cdb12b.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/Farmer_1_Harvesting_36_frames_48x48.png"
-dest_files=["res://.godot/imported/Farmer_1_Harvesting_36_frames_48x48.png-b92e51eb4500b36760d9498900cdb12b.ctex"]
 
 [params]
 

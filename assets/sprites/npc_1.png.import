@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cg61lgdqku6a4"
-path="res://.godot/imported/npc_1.png-4f592900c6af7f2cf9da49edf5429fc6.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/sprites/npc_1.png"
-dest_files=["res://.godot/imported/npc_1.png-4f592900c6af7f2cf9da49edf5429fc6.ctex"]
 
 [params]
 
