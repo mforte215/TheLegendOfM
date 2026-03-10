@@ -1,32 +1,3 @@
-[gd_scene format=3 uid="uid://c8yqttwycf5ug"]
-
-[ext_resource type="Script" uid="uid://dg215chbj60s6" path="res://resources/item_pickup.gd" id="1_2vq3m"]
-[ext_resource type="Texture2D" uid="uid://uh74enbkeoe7" path="res://assets/sprites/48x48 health potion.png" id="2_pdgjg"]
-[ext_resource type="Script" uid="uid://blis1htt4gu62" path="res://resources/item_data.gd" id="3_q8bhc"]
-
-[sub_resource type="Resource" id="Resource_hqbq7"]
-script = ExtResource("3_q8bhc")
-id = "1"
-icon = ExtResource("2_pdgjg")
-metadata/_custom_type_script = "uid://blis1htt4gu62"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_bay1x"]
-radius = 13.0
-
-[node name="ItemPickup" type="Area2D" unique_id=1034540688]
-light_mask = 8
-visibility_layer = 2
-script = ExtResource("1_2vq3m")
-item = SubResource("Resource_hqbq7")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=445622945]
-light_mask = 8
-visibility_layer = 2
-position = Vector2(0.4951439, -1)
-scale = Vector2(0.065, 0.063)
-offset = Vector2(0, -26)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771449893]
-light_mask = 8
-visibility_layer = 2
-shape = SubResource("CircleShape2D_bay1x")
+version https://git-lfs.github.com/spec/v1
+oid sha256:f740bc3afa8232b84e90dd967db98087eb95b51557232f79b9e6c64f85d7b4f0
+size 1160

@@ -1,11 +1,3 @@
-[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://c0ltgaau12vix"]
-
-[ext_resource type="Script" uid="uid://dfuvdlcsylrrx" path="res://resources/character_stats.gd" id="1_wnjrx"]
-
-[resource]
-script = ExtResource("1_wnjrx")
-character_name = "Red Fungus"
-max_health = 4
-current_health = 4
-speed = 80.0
-metadata/_custom_type_script = "uid://dfuvdlcsylrrx"
+version https://git-lfs.github.com/spec/v1
+oid sha256:b9f453438104570b7fc7b92020a8f6235d2341f5f78d1df0965d80041e8ea88c
+size 380

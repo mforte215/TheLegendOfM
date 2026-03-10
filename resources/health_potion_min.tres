@@ -1,14 +1,3 @@
-[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dtixqxg8v02dk"]
-
-[ext_resource type="Texture2D" uid="uid://uh74enbkeoe7" path="res://assets/sprites/48x48 health potion.png" id="1_tif4o"]
-[ext_resource type="Script" uid="uid://blis1htt4gu62" path="res://resources/item_data.gd" id="1_w0cau"]
-
-[resource]
-script = ExtResource("1_w0cau")
-id = "0"
-item_name = "Health Potion"
-description = "A cherry flavored liquid"
-icon = ExtResource("1_tif4o")
-effect_value = 2
-use_effect = "heal"
-metadata/_custom_type_script = "uid://blis1htt4gu62"
+version https://git-lfs.github.com/spec/v1
+oid sha256:69454e9948148425d294364ea3043d3dee586e53b82d51c8c73b2d487d928c05
+size 558

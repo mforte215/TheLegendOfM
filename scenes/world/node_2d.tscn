@@ -1,20 +1,3 @@
-[gd_scene format=3 uid="uid://ua5kp7jauaso"]
-
-[ext_resource type="Script" uid="uid://bisg8l44vaorl" path="res://scenes/world/node_2d.gd" id="1_x14md"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfiur"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x14md"]
-
-[node name="Node2D" type="Node2D" unique_id=1491806270]
-script = ExtResource("1_x14md")
-
-[node name="AreaOne" type="Area2D" parent="." unique_id=1596595904]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaOne" unique_id=566475004]
-shape = SubResource("RectangleShape2D_mfiur")
-
-[node name="AreaTwo" type="Area2D" parent="." unique_id=1237438453]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTwo" unique_id=1914310234]
-shape = SubResource("RectangleShape2D_x14md")
+version https://git-lfs.github.com/spec/v1
+oid sha256:e9bdef6e8c0a38a53da1ab795e840b75913cd1c7e2a2c1b0939cdddd9270ecef
+size 793
