@@ -14,20 +14,26 @@ func save_game() -> void:
 			"experience": Player.stats.experience
 		},
 		"inventory": {
-			"items": [],
-			"equipped_item": ""
+			"slots": [],
+			"equipped": {}
 		}
 	}
 	
-	# Save inventory items
-	for item in Player.stats.inventory.items:
-		save_data["inventory"]["items"].append(item.resource_path)
+	# Save inventory slots
+	for i in InventoryManager.MAX_SLOTS:
+		var slot = InventoryManager.get_slot(i)
+		if slot != null:
+			save_data["inventory"]["slots"].append({
+				"index": i,
+				"item_path": slot["item"].resource_path,
+				"quantity": slot["quantity"]
+			})
 	
-	# Save equipped item
-	if Player.stats.inventory.equipped_item != null:
-		save_data["inventory"]["equipped_item"] = Player.stats.inventory.equipped_item.resource_path
+	# Save equipped items
+	for slot_name in InventoryManager.equipped:
+		var item: ItemData = InventoryManager.equipped[slot_name]
+		save_data["inventory"]["equipped"][slot_name] = item.resource_path
 	
-	# Write to file
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(save_data))
 	file.close()
@@ -59,21 +65,29 @@ func load_game() -> bool:
 	Player.stats.level = stats["level"]
 	Player.stats.experience = stats["experience"]
 	
-# Restore inventory
-	Player.stats.inventory.items.clear()
-	Player.stats.inventory.equipped_item = null  # Add this
-	for item_path in save_data["inventory"]["items"]:
-		var item := load(item_path) as ItemData
-		if item:
-			Player.stats.inventory.items.append(item)
-
-	# Restore equipped item
-	var equipped_path: String = save_data["inventory"]["equipped_item"]
-	if equipped_path != "":
-		Player.stats.inventory.equipped_item = load(equipped_path) as ItemData
+	# Clear inventory
+	for i in InventoryManager.MAX_SLOTS:
+		InventoryManager.slots[i] = null
+	InventoryManager.equipped.clear()
 	
+	# Restore inventory slots
+	for slot_data in save_data["inventory"]["slots"]:
+		var item := load(slot_data["item_path"]) as ItemData
+		if item:
+			var index: int = slot_data["index"]
+			InventoryManager.slots[index] = {
+				"item": item,
+				"quantity": slot_data["quantity"]
+			}
+	
+	# Restore equipped items
+	for slot_name in save_data["inventory"]["equipped"]:
+		var item := load(save_data["inventory"]["equipped"][slot_name]) as ItemData
+		if item:
+			InventoryManager.equipped[slot_name] = item
+	
+	InventoryManager.inventory_changed.emit()
 	HUD.update_hearts()
-	HUD.update_item_slot()
 	print("game loaded")
 	return true
 
