@@ -26,6 +26,7 @@ PauseMenu="*uid://dg3q5qbcm4wv5"
 InventoryManager="*uid://dar4a8kbe2p18"
 InventoryUI="*uid://c0xky5n8ij07h"
 ItemEffects="*uid://bip517oybbrrm"
+GameOver="*uid://kgeoq1dcd1o"
 
 [display]
 
@@ -37,6 +38,7 @@ window/stretch/mode="canvas_items"
 
 hurtbox=""
 player=""
+main_menu=""
 
 [input]
 

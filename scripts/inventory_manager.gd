@@ -7,7 +7,7 @@ signal item_equipped(item: ItemData, slot: String)
 const GRID_COLUMNS: int = 6
 const GRID_ROWS: int = 4
 const MAX_SLOTS: int = GRID_COLUMNS * GRID_ROWS  # 24
-
+var collected_pickups: Array = []
 # Each slot is { "item": ItemData, "quantity": int } or null
 var slots: Array = []
 
@@ -131,4 +131,5 @@ func clear_inventory() -> void:
 	for i in MAX_SLOTS:
 		slots[i] = null
 	equipped.clear()
+	collected_pickups.clear()
 	inventory_changed.emit()

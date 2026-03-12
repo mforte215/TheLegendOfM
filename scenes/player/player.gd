@@ -10,7 +10,8 @@ var is_invincible: bool = false
 enum State { IDLE, MOVE, SPRINT, ATTACK }
 var state := State.IDLE
 var projectile_scene: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
-
+var is_dead := false
+var death_id: int = 0
 func _ready() -> void:
 	$Camera2D.enabled = false
 	process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -127,8 +128,31 @@ func take_damage(amount: int) -> void:
 	is_invincible = false
 
 func die() -> void:
-	print("player died")
-	# death handling will go here
+	if is_dead:
+		return
+	is_dead = true
+	is_attacking = false
+	state = State.IDLE
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	
+	var sprite := $AnimatedSprite2D
+	for i in 3:
+		sprite.modulate.a = 0.3
+		await get_tree().create_timer(0.15).timeout
+		sprite.modulate.a = 1.0
+		await get_tree().create_timer(0.15).timeout
+	
+	sprite.modulate.a = 0.0
+	await get_tree().create_timer(0.5).timeout
+	
+	# Don't show game over if we've already left to the menu
+	if get_tree().get_first_node_in_group("main_menu") != null:
+		return
+	if not is_dead:
+		return
+	
+	GameOver.show_screen()
 
 func flash() -> void:
 	var sprite := $AnimatedSprite2D

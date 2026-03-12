@@ -15,7 +15,8 @@ func save_game() -> void:
 		},
 		"inventory": {
 			"slots": [],
-			"equipped": {}
+			"equipped": {},
+			"collected_pickups": InventoryManager.collected_pickups
 		}
 	}
 	
@@ -83,7 +84,8 @@ func load_game() -> bool:
 		var item := load(save_data["inventory"]["equipped"][slot_name]) as ItemData
 		if item:
 			InventoryManager.equipped[slot_name] = item
-	
+	if save_data["inventory"].has("collected_pickups"):
+		InventoryManager.collected_pickups = save_data["inventory"]["collected_pickups"]
 	InventoryManager.inventory_changed.emit()
 	HUD.update_hearts()
 	print("game loaded")
