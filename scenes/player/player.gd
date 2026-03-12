@@ -18,9 +18,6 @@ func _ready() -> void:
 	$HitboxArea/CollisionShape2D.disabled = true
 	$HurtboxArea.hurt.connect(take_damage)
 	
-	print("HurtboxArea: ", $HurtboxArea)
-	print("HurtboxArea owner: ", $HurtboxArea.owner)
-	
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
@@ -60,7 +57,6 @@ func update_animation() -> void:
 		State.SPRINT:
 			anim.play("walk_" + dir)  # Reuses walk animation for now
 		State.ATTACK:
-			print("Playing attack animation")
 			anim.play("punch_" + dir)
 
 
@@ -76,17 +72,27 @@ func place_at(pos: Vector2) -> void:
 func attack() -> void:
 	is_attacking = true
 	state = State.ATTACK
-	velocity = Vector2.ZERO  # Stop movement during attack
+	velocity = Vector2.ZERO
 	position_hitbox()
 	
 	$HitboxArea/CollisionShape2D.disabled = false
 	$HitboxArea.damage = stats.attack
 	
-	# Play the animation and wait for it to finish
 	var dir := get_direction_name()
-	$AnimatedSprite2D.play("punch_" + dir)
-	await $AnimatedSprite2D.animation_finished  # await the SIGNAL, not call it
+	var anim_prefix := "punch"
+	if InventoryManager.equipped.has("weapon"):
+		var weapon: ItemData = InventoryManager.equipped["weapon"]
+		if weapon.attack_anim != "":
+			print("WEAPONS ANIMATION")
+			anim_prefix = weapon.attack_anim
+			# Show and play weapon overlay
+			$WeaponSprite.visible = true
+			$WeaponSprite.play(anim_prefix + "_" + dir)
 	
+	$AnimatedSprite2D.play(anim_prefix + "_" + dir)
+	await $AnimatedSprite2D.animation_finished
+	
+	$WeaponSprite.visible = false
 	$HitboxArea/CollisionShape2D.disabled = true
 	
 	is_attacking = false

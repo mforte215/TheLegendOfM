@@ -1,11 +1,16 @@
 extends CanvasLayer
 
 @onready var hearts_container := $MarginContainer/VBoxContainer/HeartsContainer
-@onready var item_icon := $MarginContainer/VBoxContainer/ItemBar/ItemSlotBG/ItemIcon
+@onready var item_bar := $MarginContainer/VBoxContainer/ItemBar
 
 var heart_textures: Array = []
 const HEARTS: int = 3
 const HP_PER_HEART: int = 4
+
+var weapon_icon: TextureRect
+var ranged_icon: TextureRect
+var weapon_slot_bg: PanelContainer
+var ranged_slot_bg: PanelContainer
 
 func _ready() -> void:
 	heart_textures = [
@@ -23,10 +28,60 @@ func _ready() -> void:
 		heart.custom_minimum_size = Vector2(24, 24)
 		hearts_container.add_child(heart)
 	
+	_build_dual_weapon_slots()
 	update_hearts()
-	update_item_slot()
-	InventoryManager.inventory_changed.connect(update_item_slot)
+	update_item_slots()
+	InventoryManager.inventory_changed.connect(update_item_slots)
 	InventoryManager.item_equipped.connect(_on_item_equipped)
+
+func _build_dual_weapon_slots() -> void:
+	for child in item_bar.get_children():
+		child.queue_free()
+	
+	weapon_slot_bg = _create_slot_box("X")
+	item_bar.add_child(weapon_slot_bg)
+	weapon_icon = weapon_slot_bg.get_node("VBox/Icon")
+	
+	var spacer := Control.new()
+	spacer.custom_minimum_size = Vector2(4, 0)
+	item_bar.add_child(spacer)
+	
+	ranged_slot_bg = _create_slot_box("RT")
+	item_bar.add_child(ranged_slot_bg)
+	ranged_icon = ranged_slot_bg.get_node("VBox/Icon")
+
+func _create_slot_box(button_label: String) -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.custom_minimum_size = Vector2(32, 32)
+	
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.1, 0.1, 0.15, 0.85)
+	style.border_color = Color(0.4, 0.4, 0.5)
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(2)
+	panel.add_theme_stylebox_override("panel", style)
+	
+	var vbox := VBoxContainer.new()
+	vbox.name = "VBox"
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	panel.add_child(vbox)
+	
+	var icon := TextureRect.new()
+	icon.name = "Icon"
+	icon.custom_minimum_size = Vector2(24, 24)
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	icon.visible = false
+	vbox.add_child(icon)
+	
+	var label := Label.new()
+	label.text = button_label
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 8)
+	label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.7))
+	vbox.add_child(label)
+	
+	return panel
 
 func update_hearts() -> void:
 	var current_hp: int = Player.stats.current_health
@@ -46,21 +101,20 @@ func update_hearts() -> void:
 		else:
 			heart.texture = heart_textures[4]
 
-func update_item_slot() -> void:
-	if InventoryManager.equipped.is_empty():
-		item_icon.visible = false
+func update_item_slots() -> void:
+	if InventoryManager.equipped.has("weapon"):
+		var item: ItemData = InventoryManager.equipped["weapon"]
+		weapon_icon.texture = item.icon
+		weapon_icon.visible = true
 	else:
-		var item: ItemData = null
-		if InventoryManager.equipped.has("weapon"):
-			item = InventoryManager.equipped["weapon"]
-		else:
-			item = InventoryManager.equipped.values()[0]
-		
-		if item != null:
-			item_icon.texture = item.icon
-			item_icon.visible = true
-		else:
-			item_icon.visible = false
+		weapon_icon.visible = false
+	
+	if InventoryManager.equipped.has("ranged"):
+		var item: ItemData = InventoryManager.equipped["ranged"]
+		ranged_icon.texture = item.icon
+		ranged_icon.visible = true
+	else:
+		ranged_icon.visible = false
 
 func _on_item_equipped(_item: ItemData, _slot: String) -> void:
-	update_item_slot()
+	update_item_slots()

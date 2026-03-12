@@ -16,3 +16,4 @@ enum ItemType { USABLE, EQUIPMENT, KEY_ITEM, CONSUMABLE }
 @export var attack_bonus: int = 0
 @export var defense_bonus: int = 0
 @export var equip_slot: String = ""
+@export var attack_anim: String = ""
