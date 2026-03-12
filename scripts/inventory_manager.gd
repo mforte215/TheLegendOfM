@@ -12,7 +12,7 @@ const MAX_SLOTS: int = GRID_COLUMNS * GRID_ROWS  # 24
 var slots: Array = []
 
 # Currently equipped items by slot name
-var equipped: Dictionary = {}
+var  equipped: Dictionary = {}
 
 func _ready() -> void:
 	slots.resize(MAX_SLOTS)
