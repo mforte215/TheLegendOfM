@@ -9,6 +9,7 @@ var facing := Vector2.DOWN
 var is_invincible: bool = false
 enum State { IDLE, MOVE, SPRINT, ATTACK }
 var state := State.IDLE
+var projectile_scene: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
 
 func _ready() -> void:
 	$Camera2D.enabled = false
@@ -25,9 +26,13 @@ func _physics_process(_delta: float) -> void:
 		attack()
 		return
 	
+	if Input.is_action_just_pressed("ranged_attack") and not is_attacking:
+		ranged_attack()
+		return
+	
 	if is_attacking:
 		return  # Don't let movement overwrite attack state
-	
+
 	var input := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
@@ -136,3 +141,41 @@ func enable_camera() -> void:
 			
 func disable_camera() -> void:
 	$Camera2D.enabled = false
+
+func ranged_attack() -> void:
+	if not InventoryManager.equipped.has("ranged"):
+		print("No ranged weapon equipped")
+		return
+	
+	is_attacking = true
+	state = State.ATTACK
+	velocity = Vector2.ZERO
+	
+	var ranged_item: ItemData = InventoryManager.equipped["ranged"]
+	
+	# Play shoot animation
+	var dir := get_direction_name()
+	$AnimatedSprite2D.play("shoot_" + dir)
+	
+	# Spawn projectile
+	var projectile = projectile_scene.instantiate()
+	var move_dir: Vector2
+	var spawn_offset: float
+	
+	if abs(facing.x) > abs(facing.y):
+		move_dir = Vector2(sign(facing.x), 0)
+		spawn_offset = 30.0
+	else:
+		move_dir = Vector2(0, sign(facing.y))
+		spawn_offset = 45.0
+	
+	projectile.direction = move_dir
+	projectile.damage = ranged_item.attack_bonus
+	get_tree().current_scene.add_child(projectile)
+	projectile.global_position = global_position + (move_dir * spawn_offset)
+	
+	# Wait for animation to finish
+	await $AnimatedSprite2D.animation_finished
+	
+	is_attacking = false
+	state = State.IDLE

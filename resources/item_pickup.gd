@@ -10,6 +10,9 @@ func _ready() -> void:
 	monitoring = false  # Disable detection at start
 	if item and item.icon:
 		sprite.texture = item.icon
+		var tex_size: Vector2 = item.icon.get_size()
+		var target_size: float = 24.0
+		sprite.scale = Vector2(target_size / tex_size.x, target_size / tex_size.y)
 	# Wait for scene to settle before enabling
 	await get_tree().create_timer(0.2).timeout
 	monitoring = true

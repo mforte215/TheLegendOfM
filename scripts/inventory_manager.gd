@@ -91,14 +91,15 @@ func equip_item(slot_index: int) -> void:
 	if item.item_type != ItemData.ItemType.EQUIPMENT or item.equip_slot == "":
 		return
 
-	# Swap with currently equipped
-	var old_equipped: ItemData = equipped.get(item.equip_slot, null)
+	# If this item is already equipped, unequip it
+	if equipped.get(item.equip_slot) == item:
+		equipped.erase(item.equip_slot)
+		item_equipped.emit(item, item.equip_slot)
+		inventory_changed.emit()
+		return
+
+	# Equip the new item (keep it in the slot)
 	equipped[item.equip_slot] = item
-	slots[slot_index] = null
-
-	if old_equipped:
-		add_item(old_equipped, 1)
-
 	item_equipped.emit(item, item.equip_slot)
 	inventory_changed.emit()
 

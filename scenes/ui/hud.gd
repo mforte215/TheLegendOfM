@@ -18,7 +18,9 @@ func _ready() -> void:
 	
 	for i in HEARTS:
 		var heart := TextureRect.new()
-		heart.stretch_mode = TextureRect.STRETCH_KEEP
+		heart.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		heart.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		heart.custom_minimum_size = Vector2(24, 24)
 		hearts_container.add_child(heart)
 	
 	update_hearts()
