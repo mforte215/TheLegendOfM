@@ -67,8 +67,10 @@ func get_direction_name() -> String:
 	else:
 		return "down" if facing.y > 0 else "up"
 		
-func place_at(pos: Vector2) -> void:
+func place_at(pos: Vector2, direction: Vector2 = Vector2.DOWN) -> void:
 	global_position = pos
+	facing = direction
+	update_animation()
 	
 func attack() -> void:
 	is_attacking = true
@@ -194,10 +196,10 @@ func ranged_attack() -> void:
 	
 	if abs(facing.x) > abs(facing.y):
 		move_dir = Vector2(sign(facing.x), 0)
-		spawn_offset = 30.0
+		spawn_offset = 40.0
 	else:
 		move_dir = Vector2(0, sign(facing.y))
-		spawn_offset = 45.0
+		spawn_offset = 55.0
 	
 	projectile.direction = move_dir
 	projectile.damage = ranged_item.attack_bonus

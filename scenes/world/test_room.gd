@@ -1,7 +1,4 @@
-extends Node2D
+extends "res://scenes/world/base_room.gd"
 
-func _ready() -> void:
-	Player.place_at($PlayerSpawn.global_position)
-	Player.show()
-	Player.enable_camera()
-	HUD.show()
+func _room_ready() -> void:
+	pass
