@@ -6,9 +6,6 @@ var load_button: Button
 var quit_button: Button
 
 func _ready() -> void:
-	var current_scene = get_tree().current_scene
-	print("IN SCENE:")
-	print(current_scene.name)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 20
 	visible = false
@@ -70,19 +67,14 @@ func hide_screen() -> void:
 	visible = false
 
 func _reset_player() -> void:
-	Player.is_dead = false
-	Player.death_id += 1
-	Player.set_physics_process(true)
-	Player.get_node("AnimatedSprite2D").modulate.a = 1.0
-	Player.is_invincible = false
-	Player.is_attacking = false
-	Player.state = Player.State.IDLE
+	PlayerData.is_dead = false
+	PlayerData.stats.current_health = PlayerData.stats.max_health
+	PlayerData.facing = Vector2.DOWN
 
 func _on_retry() -> void:
 	visible = false
 	get_tree().paused = false
 	_reset_player()
-	Player.stats.current_health = Player.stats.max_health
 	HUD.update_hearts()
 	
 	var current_scene_path := get_tree().current_scene.scene_file_path
@@ -102,6 +94,4 @@ func _on_quit() -> void:
 	get_tree().paused = false
 	_reset_player()
 	HUD.hide()
-	Player.hide()
-	Player.disable_camera()
 	TransitionManager.transition_to("res://scenes/ui/main_menu.tscn")

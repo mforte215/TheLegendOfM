@@ -84,7 +84,7 @@ func _create_slot_box(button_label: String) -> PanelContainer:
 	return panel
 
 func update_hearts() -> void:
-	var current_hp: int = Player.stats.current_health
+	var current_hp: int = PlayerData.stats.current_health
 	
 	for i in HEARTS:
 		var heart := hearts_container.get_child(i)

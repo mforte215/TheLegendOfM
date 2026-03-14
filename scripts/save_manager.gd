@@ -5,13 +5,13 @@ const SAVE_PATH := "user://savegame.json"
 func save_game() -> void:
 	var save_data := {
 		"player_stats": {
-			"current_health": Player.stats.current_health,
-			"max_health": Player.stats.max_health,
-			"attack": Player.stats.attack,
-			"defense": Player.stats.defense,
-			"speed": Player.stats.speed,
-			"level": Player.stats.level,
-			"experience": Player.stats.experience
+			"current_health": PlayerData.stats.current_health,
+			"max_health": PlayerData.stats.max_health,
+			"attack": PlayerData.stats.attack,
+			"defense": PlayerData.stats.defense,
+			"speed": PlayerData.stats.speed,
+			"level": PlayerData.stats.level,
+			"experience": PlayerData.stats.experience
 		},
 		"inventory": {
 			"slots": [],
@@ -20,7 +20,6 @@ func save_game() -> void:
 		}
 	}
 	
-	# Save inventory slots
 	for i in InventoryManager.MAX_SLOTS:
 		var slot = InventoryManager.get_slot(i)
 		if slot != null:
@@ -30,7 +29,6 @@ func save_game() -> void:
 				"quantity": slot["quantity"]
 			})
 	
-	# Save equipped items
 	for slot_name in InventoryManager.equipped:
 		var item: ItemData = InventoryManager.equipped[slot_name]
 		save_data["inventory"]["equipped"][slot_name] = item.resource_path
@@ -56,36 +54,34 @@ func load_game() -> bool:
 	
 	var save_data: Dictionary = json.get_data()
 	
-	# Restore stats
 	var stats: Dictionary = save_data["player_stats"]
-	Player.stats.current_health = stats["current_health"]
-	Player.stats.max_health = stats["max_health"]
-	Player.stats.attack = stats["attack"]
-	Player.stats.defense = stats["defense"]
-	Player.stats.speed = stats["speed"]
-	Player.stats.level = stats["level"]
-	Player.stats.experience = stats["experience"]
+	PlayerData.stats.current_health = stats["current_health"]
+	PlayerData.stats.max_health = stats["max_health"]
+	PlayerData.stats.attack = stats["attack"]
+	PlayerData.stats.defense = stats["defense"]
+	PlayerData.stats.speed = stats["speed"]
+	PlayerData.stats.level = stats["level"]
+	PlayerData.stats.experience = stats["experience"]
 	
-	# Clear inventory
 	InventoryManager.clear_inventory()
 	
-	# Restore inventory slots
 	for slot_data in save_data["inventory"]["slots"]:
 		var item := load(slot_data["item_path"]) as ItemData
 		if item:
-			var index: int = slot_data["index"]
+			var index: int = int(slot_data["index"])
 			InventoryManager.slots[index] = {
 				"item": item,
 				"quantity": int(slot_data["quantity"])
 			}
 	
-	# Restore equipped items
 	for slot_name in save_data["inventory"]["equipped"]:
 		var item := load(save_data["inventory"]["equipped"][slot_name]) as ItemData
 		if item:
 			InventoryManager.equipped[slot_name] = item
+	
 	if save_data["inventory"].has("collected_pickups"):
 		InventoryManager.collected_pickups = save_data["inventory"]["collected_pickups"]
+	
 	InventoryManager.inventory_changed.emit()
 	HUD.update_hearts()
 	print("game loaded")

@@ -17,9 +17,13 @@ var projectile_scene: PackedScene = preload("res://scenes/projectiles/enemy_proj
 
 func _ready() -> void:
 	stats.current_health = stats.max_health
-	player = get_tree().get_first_node_in_group("player")
 	if not $HurtboxArea.hurt.is_connected(take_damage):
 		$HurtboxArea.hurt.connect(take_damage)
+	set_physics_process(false)
+	await get_tree().process_frame
+	player = get_tree().get_first_node_in_group("player")
+	await get_tree().create_timer(0.5).timeout
+	set_physics_process(true)
 
 func _physics_process(_delta: float) -> void:
 	match state:

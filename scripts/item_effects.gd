@@ -4,7 +4,6 @@ func _ready() -> void:
 	InventoryManager.item_used.connect(_on_item_used)
 
 func _on_item_used(item: ItemData) -> void:
-	
 	match item.use_effect:
 		"heal":
 			_heal(item.effect_value)
@@ -14,9 +13,9 @@ func _on_item_used(item: ItemData) -> void:
 			print("No effect defined for: ", item.use_effect)
 
 func _heal(amount: int) -> void:
-	Player.stats.current_health = min(
-		Player.stats.current_health + amount,
-		Player.stats.max_health
+	PlayerData.stats.current_health = min(
+		PlayerData.stats.current_health + amount,
+		PlayerData.stats.max_health
 	)
 	HUD.update_hearts()
-	print("Healed for ", amount, ". Health: ", Player.stats.current_health)
+	print("Healed for ", amount, ". Health: ", PlayerData.stats.current_health)

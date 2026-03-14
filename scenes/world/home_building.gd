@@ -19,16 +19,15 @@ func _on_body_entered(body: Node) -> void:
 func open_door() -> void:
 	door_opened = true
 	
-	Player.set_physics_process(false)
-	Player.velocity = Vector2.ZERO
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.set_physics_process(false)
+		player.velocity = Vector2.ZERO
 	
 	$DoorSprite.play("opening")
 	await $DoorSprite.animation_finished
 	$DoorSprite.play("open")
 	
 	if target_scene != "":
-		print("Transitioning with spawn_id: '", spawn_id, "'")
 		await get_tree().create_timer(0.3).timeout
 		TransitionManager.transition_to_spawn(target_scene, spawn_id)
-	else:
-		Player.set_physics_process(true)

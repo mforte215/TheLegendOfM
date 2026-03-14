@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var options_button := $ColorRect/VBoxContainer/Options
 @onready var quit_button := $ColorRect/VBoxContainer/Quit
 var can_toggle: bool = true
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	hide()
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -20,7 +20,6 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause_toggle"):
 		can_toggle = false
 		if visible:
-			print("CLOSING")
 			close()
 		else:
 			open()
@@ -33,10 +32,8 @@ func open() -> void:
 	resume_button.grab_focus()
 
 func close() -> void:
-	print("closing pause menu")
 	get_tree().paused = false
 	hide()
-	print("paused: ", get_tree().paused)
 
 func _on_resume() -> void:
 	close()
@@ -45,11 +42,9 @@ func _on_save() -> void:
 	SaveManager.save_game()
 
 func _on_options() -> void:
-	pass  # build later
+	pass
 
 func _on_quit() -> void:
 	close()
 	HUD.hide()
-	Player.hide()
-	Player.disable_camera()
 	TransitionManager.transition_to("res://scenes/ui/main_menu.tscn")

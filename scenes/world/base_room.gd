@@ -1,8 +1,11 @@
 extends Node2D
 
+var player_instance: CharacterBody2D
+
 func _ready() -> void:
+	y_sort_enabled = true
+	
 	var spawn_id := TransitionManager.next_spawn_id
-	print("Base room ready, spawn_id: ", spawn_id)
 	var spawn_point: Marker2D = null
 	
 	for child in get_children():
@@ -39,10 +42,12 @@ func _ready() -> void:
 		elif pos.x > map_size.x - margin:
 			face_dir = Vector2.LEFT
 	
-	Player.set_physics_process(true)
-	Player.place_at(spawn_point.global_position, face_dir)
-	Player.show()
-	Player.enable_camera()
+	# Instance the player into this scene
+	player_instance = PlayerData.player_scene.instantiate()
+	add_child(player_instance)
+	player_instance.place_at(spawn_point.global_position, face_dir)
+	player_instance.get_node("Camera2D").enabled = true
+	
 	HUD.show()
 	
 	_room_ready()

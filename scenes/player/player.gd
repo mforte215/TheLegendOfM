@@ -1,24 +1,28 @@
 extends CharacterBody2D
-@export var stats: CharacterStats
+
 @export var speed: float = 150.0
-@export var sprint_speed: float = 250.0  # Add this
+@export var sprint_speed: float = 250.0
 @export var attack_damage: int = 1
 var is_attacking := false
 var facing := Vector2.DOWN
 @export var invincibility_time: float = 1.0
 var is_invincible: bool = false
+var is_dead := false
 enum State { IDLE, MOVE, SPRINT, ATTACK }
 var state := State.IDLE
 var projectile_scene: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
-var is_dead := false
-var death_id: int = 0
+
+var stats: CharacterStats:
+	get:
+		return PlayerData.stats
+
 func _ready() -> void:
-	$Camera2D.enabled = false
+	add_to_group("player")
 	process_mode = Node.PROCESS_MODE_PAUSABLE
-	stats.current_health = stats.max_health
 	$HitboxArea/CollisionShape2D.disabled = true
 	$HurtboxArea.hurt.connect(take_damage)
-	
+	facing = PlayerData.facing
+
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
@@ -29,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	if is_attacking:
-		return  # Don't let movement overwrite attack state
+		return
 
 	var input := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
@@ -56,22 +60,22 @@ func update_animation() -> void:
 		State.MOVE:
 			anim.play("walk_" + dir)
 		State.SPRINT:
-			anim.play("walk_" + dir)  # Reuses walk animation for now
+			anim.play("walk_" + dir)
 		State.ATTACK:
 			anim.play("punch_" + dir)
-
 
 func get_direction_name() -> String:
 	if abs(facing.x) > abs(facing.y):
 		return "right" if facing.x > 0 else "left"
 	else:
 		return "down" if facing.y > 0 else "up"
-		
+
 func place_at(pos: Vector2, direction: Vector2 = Vector2.DOWN) -> void:
 	global_position = pos
 	facing = direction
+	PlayerData.facing = direction
 	update_animation()
-	
+
 func attack() -> void:
 	is_attacking = true
 	state = State.ATTACK
@@ -86,9 +90,7 @@ func attack() -> void:
 	if InventoryManager.equipped.has("weapon"):
 		var weapon: ItemData = InventoryManager.equipped["weapon"]
 		if weapon.attack_anim != "":
-			print("WEAPONS ANIMATION")
 			anim_prefix = weapon.attack_anim
-			# Show and play weapon overlay
 			$WeaponSprite.visible = true
 			$WeaponSprite.play(anim_prefix + "_" + dir)
 	
@@ -100,18 +102,16 @@ func attack() -> void:
 	
 	is_attacking = false
 	state = State.IDLE
-	
+
 func position_hitbox() -> void:
 	var hitbox := $HitboxArea
 	var offset := 30.0
 	
 	if abs(facing.x) > abs(facing.y):
-		# Horizontal
 		hitbox.position = Vector2(offset * sign(facing.x), 0)
 	else:
-		# Vertical
 		hitbox.position = Vector2(0, offset * sign(facing.y))
-		
+
 func take_damage(amount: int) -> void:
 	if is_invincible:
 		return
@@ -120,7 +120,7 @@ func take_damage(amount: int) -> void:
 	var actual_damage: int = max(amount - stats.defense, 1)
 	stats.current_health -= actual_damage
 	HUD.update_hearts()
-	flash()  # Add this
+	flash()
 	
 	if stats.current_health <= 0:
 		die()
@@ -133,6 +133,7 @@ func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	PlayerData.is_dead = true
 	is_attacking = false
 	state = State.IDLE
 	velocity = Vector2.ZERO
@@ -148,7 +149,6 @@ func die() -> void:
 	sprite.modulate.a = 0.0
 	await get_tree().create_timer(0.5).timeout
 	
-	# Don't show game over if we've already left to the menu
 	if get_tree().get_first_node_in_group("main_menu") != null:
 		return
 	if not is_dead:
@@ -170,7 +170,7 @@ func flash() -> void:
 
 func enable_camera() -> void:
 	$Camera2D.enabled = true
-			
+
 func disable_camera() -> void:
 	$Camera2D.enabled = false
 
@@ -185,28 +185,25 @@ func ranged_attack() -> void:
 	
 	var ranged_item: ItemData = InventoryManager.equipped["ranged"]
 	
-	# Play shoot animation
 	var dir := get_direction_name()
 	$AnimatedSprite2D.play("shoot_" + dir)
 	
-	# Spawn projectile
 	var projectile = projectile_scene.instantiate()
 	var move_dir: Vector2
 	var spawn_offset: float
 	
 	if abs(facing.x) > abs(facing.y):
 		move_dir = Vector2(sign(facing.x), 0)
-		spawn_offset = 40.0
+		spawn_offset = 30.0
 	else:
 		move_dir = Vector2(0, sign(facing.y))
-		spawn_offset = 55.0
+		spawn_offset = 45.0
 	
 	projectile.direction = move_dir
 	projectile.damage = ranged_item.attack_bonus
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position + (move_dir * spawn_offset)
 	
-	# Wait for animation to finish
 	await $AnimatedSprite2D.animation_finished
 	
 	is_attacking = false

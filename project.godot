@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="TheLegendofM"
-run/main_scene="uid://xdf63xqw7ng7"
+run/main_scene="uid://c7wrullwfvnbe"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 TransitionManager="*uid://d33ipdpsrr2j5"
-Player="*uid://budhmsosqj23n"
 DialogueBox="*uid://b8353v30sube2"
 HUD="*uid://bork3slxpgdhw"
 SaveManager="*uid://cf5t6tax0l2v7"
@@ -27,6 +26,7 @@ InventoryManager="*uid://dar4a8kbe2p18"
 InventoryUI="*uid://c0xky5n8ij07h"
 ItemEffects="*uid://bip517oybbrrm"
 GameOver="*uid://kgeoq1dcd1o"
+PlayerData="*uid://bianxv62tja7"
 
 [display]
 

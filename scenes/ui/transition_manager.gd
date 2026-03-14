@@ -28,7 +28,6 @@ func transition_to_spawn(scene_path: String, spawn_id: String) -> void:
 		return
 	is_transitioning = true
 	next_spawn_id = spawn_id
-	print("TransitionManager storing spawn_id: '", next_spawn_id, "'")
 	await fade_to_black()
 	get_tree().change_scene_to_file(scene_path)
 	await fade_to_clear()
