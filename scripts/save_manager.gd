@@ -13,6 +13,7 @@ func save_game() -> void:
 			"level": PlayerData.stats.level,
 			"experience": PlayerData.stats.experience
 		},
+		"coins": PlayerData.coins,
 		"inventory": {
 			"slots": [],
 			"equipped": {},
@@ -62,7 +63,9 @@ func load_game() -> bool:
 	PlayerData.stats.speed = stats["speed"]
 	PlayerData.stats.level = stats["level"]
 	PlayerData.stats.experience = stats["experience"]
-	
+	if save_data.has("coins"):
+		PlayerData.coins = int(save_data["coins"])
+		PlayerData.coins_changed.emit()	
 	InventoryManager.clear_inventory()
 	
 	for slot_data in save_data["inventory"]["slots"]:

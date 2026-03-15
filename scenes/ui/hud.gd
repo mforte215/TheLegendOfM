@@ -11,6 +11,7 @@ var weapon_icon: TextureRect
 var ranged_icon: TextureRect
 var weapon_slot_bg: PanelContainer
 var ranged_slot_bg: PanelContainer
+var coin_label: Label
 
 func _ready() -> void:
 	heart_textures = [
@@ -29,6 +30,8 @@ func _ready() -> void:
 		hearts_container.add_child(heart)
 	
 	_build_dual_weapon_slots()
+	_build_coin_display()
+	PlayerData.coins_changed.connect(update_coin_display)
 	update_hearts()
 	update_item_slots()
 	InventoryManager.inventory_changed.connect(update_item_slots)
@@ -118,3 +121,24 @@ func update_item_slots() -> void:
 
 func _on_item_equipped(_item: ItemData, _slot: String) -> void:
 	update_item_slots()
+
+func _build_coin_display() -> void:
+	var coin_hbox := HBoxContainer.new()
+	coin_hbox.add_theme_constant_override("separation", 4)
+	$MarginContainer/VBoxContainer.add_child(coin_hbox)
+	
+	var coin_icon := TextureRect.new()
+	coin_icon.custom_minimum_size = Vector2(16, 16)
+	coin_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	coin_icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	# If you have a coin sprite, preload it here:
+	coin_icon.texture = preload("res://assets/sprites/coin.png")
+	coin_hbox.add_child(coin_icon)
+	
+	coin_label = Label.new()
+	coin_label.add_theme_font_size_override("font_size", 12)
+	coin_label.text = "0"
+	coin_hbox.add_child(coin_label)
+
+func update_coin_display() -> void:
+	coin_label.text = str(PlayerData.coins)
