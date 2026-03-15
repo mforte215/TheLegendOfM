@@ -53,6 +53,10 @@ func open_door() -> void:
 	await tween.finished
 	
 	player.visible = false
-	
+	if $DoorSprite.sprite_frames != null:	
+		$DoorSprite.play("closing")
+		await $DoorSprite.animation_finished
+		$DoorSprite.play("closed")
+		
 	if target_scene != "":
 		TransitionManager.transition_to_spawn(target_scene, spawn_id)
