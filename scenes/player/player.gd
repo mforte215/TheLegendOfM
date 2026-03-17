@@ -53,7 +53,8 @@ func _physics_process(_delta: float) -> void:
 func update_animation() -> void:
 	var anim := $AnimatedSprite2D
 	var dir := get_direction_name()
-
+	print("PLAYER SPRITE Y POSITION")
+	print($AnimatedSprite2D.global_position)
 	match state:
 		State.IDLE:
 			anim.play("idle_" + dir)

@@ -7,6 +7,8 @@ extends StaticBody2D
 var door_opened := false
 
 func _ready() -> void:
+	print("DOOR SPRITE Y POSITION")
+	print($DoorSprite.global_position)
 	$DoorArea.body_entered.connect(_on_body_entered)
 	if $DoorSprite.sprite_frames != null:
 		$DoorSprite.play("closed")
